@@ -12,7 +12,7 @@
  <?rfc iprnotified="no" ?>
   <?rfc strict="no" ?>
 
-<rfc category="info" docName="draft-moskowitz-ed25519-pki-00" ipr="trust200902">
+<rfc category="info" docName="draft-moskowitz-eddsa-pki-00" ipr="trust200902">
  <front>
 <title abbrev="PKI Guide">Guide for building an EDDSA pki</title>
         <author fullname="Robert Moskowitz" initials="R." surname="Moskowitz" >
@@ -37,6 +37,14 @@
           <country>Germany</country>
         </postal>
         <email>henk.birkholz@sit.fraunhofer.de</email>
+      </address>
+    </author>
+    <author fullname="Michael C. Richardson" initials="M."
+            surname="Richardson">
+      <organization abbrev="Sandelman">Sandelman Software Works</organization>
+      <address>
+        <email>mcr+ietf@sandelman.ca</email>
+        <uri>http://www.sandelman.ca/</uri>
       </address>
     </author>
 <date year="2018"/>
@@ -83,18 +91,18 @@
 		even the forthcoming 802.1AR-2018; this is for future work).
 </t>
 <t>
-		This guide was developed with openSSL 1.1.1-pre9 (beta) on 
-		Fedora 29-beta and creates PEM-based certificates.  It
-		closely follows <xref target="I-D.moskowitz-ecdsa-pki" />.
+		This guide was developed with openSSL 1.1.1 on Fedora 29-beta 
+		and creates PEM-based certificates.  It closely follows <xref 
+		target="I-D.moskowitz-ecdsa-pki" />.
 </t>
 </section>
 <section anchor="terms" title="Terms and Definitions">
 <section title="Requirements Terminology">
 <t>
-                The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL 
-                NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and 
-                "OPTIONAL" in this document are to be interpreted as described 
-                in <xref target="RFC2119">RFC 2119</xref>.
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL 
+        NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and 
+        "OPTIONAL" in this document are to be interpreted as described 
+        in <xref target="RFC2119">RFC 2119</xref>.
 </t>
 </section>
 <section title="Notations">
@@ -115,13 +123,7 @@
 <t>
 		Likewise there are no hash options.  For example, neither 
 		ED25519 or ED448 signs a hash of the certificate.  As such, 
-		none of the hash options should be needed.  In practice, in 
-		beta 9, in some cases it is necessary to specify that the hash 
-		is 'null' and not to provide a default message digest hash 
-		(default_md). This has been fixed for the final release of 
-		openSSL 1.1.1. This document assumes it will be corrected, and 
-		thus has all the commands and configuration files reflecting 
-		this.
+		none of the hash options should be needed.
 </t>
 <t>
 		It should be noted here that ED25519 certificates can be ~100 
@@ -181,8 +183,8 @@
 	This guide was developed on a Fedora 29-beta armv7hl system 
 	(Cubieboard2 SoC).  It should work on most Linux and similar 
 	systems that support openSSL 1.1.1.  All work was done in a 
-	terminal window with extensive "cutting and pasting" from a draft 
-	guide into the terminal window. Users of this guide may find 
+	terminal window with extensive "cutting and pasting" from this 
+	draft guide into the terminal window. Users of this guide may find 
 	different behaviors based on their system.
 </t>
 <section anchor="FirstStep" title="Setting up the Environment">
