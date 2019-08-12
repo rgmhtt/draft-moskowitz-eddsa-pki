@@ -12,7 +12,7 @@
  <?rfc iprnotified="no" ?>
   <?rfc strict="no" ?>
 
-<rfc category="info" docName="draft-moskowitz-eddsa-pki-00" ipr="trust200902">
+<rfc category="info" docName="draft-moskowitz-eddsa-pki-01" ipr="trust200902">
  <front>
 <title abbrev="PKI Guide">Guide for building an EDDSA pki</title>
         <author fullname="Robert Moskowitz" initials="R." surname="Moskowitz" >
@@ -47,7 +47,7 @@
         <uri>http://www.sandelman.ca/</uri>
       </address>
     </author>
-<date year="2018"/>
+<date year="2019"/>
    <area>Security Area</area>
    <workgroup>wg TBD</workgroup>
     <keyword>RFC</keyword>
@@ -99,10 +99,12 @@
 <section anchor="terms" title="Terms and Definitions">
 <section title="Requirements Terminology">
 <t>
-        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL 
-        NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and 
-        "OPTIONAL" in this document are to be interpreted as described 
-        in <xref target="RFC2119">RFC 2119</xref>.
+		The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL 
+		NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", 
+		"MAY", and "OPTIONAL" in this document are to be interpreted as 
+		described in BCP 14 <xref target="RFC2119" /> <xref 
+		target="RFC8174" /> when, and only when, they appear in all 
+		capitals, as shown here.
 </t>
 </section>
 <section title="Notations">
@@ -141,8 +143,8 @@
 	the Root level is created and signs the Intermediate level 
 	certificate it can be locked up.  In fact, the Root level could 
 	exist completely on a uSD boot card for an ARM small computer like 
-	a RaspberryPi.  A copy of this card came be made and securely 
-	stored in a different location.
+	a RaspberryPi.  A copy of this card can be made and securely stored 
+	in a different location.
 </t>
 <t>
 	The Root level contains the Root certificate private key, a 
@@ -626,7 +628,7 @@ openssl asn1parse -i -strparse 141 -in $dir/csr/$DevID.csr.pem
 
 openssl rand -hex $sn > $dir/serial # hex 8 is minimum, 19 is maximum
 # Note 'openssl ca' does not support DER format
-openssl ca -config $dir/openssl-8021ARintermediate.cnf -days 375\
+openssl ca -config $dir/openssl-8021ARintermediate.cnf\
     -extensions 8021ar_idevid -notext \
     -in $dir/csr/$DevID.csr.$format\
     -out $dir/certs/$DevID.cert.$format
@@ -985,6 +987,7 @@ $restore_mask
 <back>
 <references title="Normative References">
         <?rfc include="reference.RFC.2119.xml"?>
+        <?rfc include="reference.RFC.8174.xml"?>
 </references>
 <references title="Informative References">
          &ieee_802_1ar;
