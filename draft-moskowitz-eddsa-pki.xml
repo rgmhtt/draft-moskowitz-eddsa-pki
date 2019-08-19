@@ -12,7 +12,7 @@
  <?rfc iprnotified="no" ?>
   <?rfc strict="no" ?>
 
-<rfc category="info" docName="draft-moskowitz-eddsa-pki-01" ipr="trust200902">
+<rfc category="info" docName="draft-moskowitz-eddsa-pki-02" ipr="trust200902">
  <front>
 <title abbrev="PKI Guide">Guide for building an EDDSA pki</title>
         <author fullname="Robert Moskowitz" initials="R." surname="Moskowitz" >
@@ -195,7 +195,6 @@
     variables to suit your needs.
 </t>
 <figure> <artwork>
-
 export dir=/root/ca
 export cadir=/root/ca
 export format=pem
@@ -879,7 +878,7 @@ openssl ocsp -CAfile $dir/certs/ca-chain.cert.pem \
 <t>
 	There is no direct openssl command line option to provide a 
 	subjectAltName for a certificate.  This is a serious limitation. 
-	Per <xref target="RFC2818">RFC 2818</xref> SAN is the object for 
+	Per <xref target="RFC5280">RFC 5280</xref> SAN is the object for 
 	providing email addresses and DNS addresses (FQDN), yet the common 
 	practice has been to use the commonName object within the 
 	distinguishedName object.  How much of this is due to the 
@@ -900,6 +899,24 @@ openssl req -new -key domain.key\
 
 ]]></artwork> </figure>
 </t> 
+</section>
+<section anchor="CriticalSAN" title="Certificates with only subjectAltName">
+<t>
+	Also in <xref target="RFC5280">RFC 5280</xref> (sec 4.2.1.6):  if 
+	the only subject identity in the certificate is in subjectAltName, 
+	then Subject MUST be empty and subjectAltName MUST be marked as 
+	critical.
+</t> 
+<t>
+	This can be achieved with the variable DN=/ and subjectAltName 
+	(example given):
+</t> 
+<figure> <artwork>
+
+DN=/
+export subjectAltName=critical,email:postmaster@htt-consult.com
+
+</artwork> </figure>
 </section>
 <section anchor="DER" title="DER support, or lack thereof">
 <t>
@@ -992,7 +1009,7 @@ $restore_mask
 <references title="Informative References">
          &ieee_802_1ar;
        <?rfc include="reference.RFC.2315.xml"?>
-        <?rfc include="reference.RFC.2818.xml"?>
+        <?rfc include="reference.RFC.5280.xml"?>
         <?rfc include="reference.RFC.7292.xml"?>
         <?rfc include="reference.RFC.8032.xml"?>
 	<?rfc include="reference.I-D.moskowitz-ecdsa-pki.xml"?>
